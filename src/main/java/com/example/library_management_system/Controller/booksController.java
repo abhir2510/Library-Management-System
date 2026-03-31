@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
@@ -28,7 +27,7 @@ public class booksController {
     }
 
     @GetMapping("/book/{id}")
-    public ResponseEntity<Optional<Book>> getBookById(@PathVariable int id) {
+    public ResponseEntity<Book> getBookById(@PathVariable int id) {
         return bookServices.getBookById(id);
     }
 
