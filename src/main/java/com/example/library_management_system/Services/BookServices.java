@@ -1,5 +1,7 @@
 package com.example.library_management_system.Services;
 
+import com.example.library_management_system.DTO.BookDTO;
+import com.example.library_management_system.Exception.BookExceptions.BookNotFoundException;
 import com.example.library_management_system.Models.Book;
 import com.example.library_management_system.Repositories.BooksRepository;
 
@@ -32,27 +34,29 @@ public class BookServices {
         if (book.isPresent()) {
             return ResponseEntity.ok(book.get());
         }
-        return ResponseEntity.notFound().build();
+
+        throw new BookNotFoundException();
+        //return ResponseEntity.notFound().build();
     }
 
-    public ResponseEntity<Book> updateBook(int id , Book book) {
+    public ResponseEntity<BookDTO> updateBook(int id , Book book) {
         Optional<Book> optionalBook = booksRepository.findById(id);
         if (optionalBook.isPresent()) {
             book.setBookId(id);
             booksRepository.save(book);
-            return ResponseEntity.ok(book);
+            return ResponseEntity.ok(new BookDTO(book.getBookId() , book.getBookName()));
         }
 
-        return ResponseEntity.notFound().build();
+        throw new BookNotFoundException();
     }
 
-    public ResponseEntity<Book> deleteBook(int id) {
+    public ResponseEntity<BookDTO> deleteBook(int id) {
         Optional<Book> optionalBook = booksRepository.findById(id);
         if (optionalBook.isPresent()) {
             booksRepository.deleteById(id);
-            return ResponseEntity.ok(optionalBook.get());
+            return ResponseEntity.ok(new BookDTO(optionalBook.get().getBookId() , optionalBook.get().getBookName()));
         }
 
-        return ResponseEntity.notFound().build();
+        throw new BookNotFoundException();
     }
 }

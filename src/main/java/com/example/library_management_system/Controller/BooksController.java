@@ -1,5 +1,6 @@
 package com.example.library_management_system.Controller;
 
+import com.example.library_management_system.DTO.BookDTO;
 import com.example.library_management_system.Models.Book;
 import com.example.library_management_system.Services.BookServices;
 
@@ -12,7 +13,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-public class booksController {
+public class BooksController {
 
     private final BookServices bookServices;
 
@@ -32,12 +33,12 @@ public class booksController {
     }
 
     @PutMapping("/book/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable int id ,  @RequestBody Book book) {
+    public ResponseEntity<BookDTO> updateBook(@PathVariable int id , @RequestBody Book book) {
         return bookServices.updateBook(id , book);
     }
 
     @DeleteMapping("/book/{id}")
-    public ResponseEntity<Book>  deleteBook(@PathVariable int id) {
+    public ResponseEntity<BookDTO>  deleteBook(@PathVariable int id) {
         return bookServices.deleteBook(id);
     }
 }
