@@ -1,9 +1,12 @@
 package com.example.library_management_system.Models;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "book")
 public class Book {
@@ -11,8 +14,9 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bookId")
-    int bookId;
+    private Integer bookId;
 
+    @NotNull(message = "Book Name is Required")
     @Column(name = "bookName")
     private String bookName;
 

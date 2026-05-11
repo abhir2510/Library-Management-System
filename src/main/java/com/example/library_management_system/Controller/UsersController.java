@@ -2,6 +2,7 @@ package com.example.library_management_system.Controller;
 
 import com.example.library_management_system.Models.User;
 import com.example.library_management_system.Services.UserServices;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ public class UsersController {
     private final UserServices userServices;
 
     @PostMapping("/user")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<User> createUser(@RequestBody @Valid User user) {
         return userServices.createUser(user);
     }
 

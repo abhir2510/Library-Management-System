@@ -4,6 +4,7 @@ import com.example.library_management_system.DTO.BookDTO;
 import com.example.library_management_system.Models.Book;
 import com.example.library_management_system.Services.BookServices;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class BooksController {
     private final BookServices bookServices;
 
     @PostMapping("/book")
-    public ResponseEntity<Book> createBook(@RequestBody Book book) {
+    public ResponseEntity<Book> createBook(@RequestBody @Valid Book book) {
         return bookServices.createBook(book);
     }
 
